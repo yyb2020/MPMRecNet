@@ -1,4 +1,4 @@
-# train/final_train_eval.py
+# train/train.py
 
 import os
 import pandas as pd

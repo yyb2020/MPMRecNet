@@ -12,12 +12,6 @@
 - External validation AUC = **0.849**
 - Nomogram integration with clinical features
 
-## Environment
-
-- Python 3.12 + PyTorch 2.5.1
-- Mixed precision training (AMP)
-- Key libraries: `torch`, `transformers`, `numpy`, `sklearn`, `matplotlib`
-
 
 ## Note
 

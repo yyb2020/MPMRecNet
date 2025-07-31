@@ -41,8 +41,8 @@ def main(args):
         val_cases = [case_ids[i] for i in val_idx]
         val_labels = [labels[i] for i in val_idx]
 
-        train_set = MultiModalPatchDataset(args.pt_dir, train_cases, train_labels)
-        val_set = MultiModalPatchDataset(args.pt_dir, val_cases, val_labels)
+        train_set = MultiModalPatchDataset(args.file_dir, train_cases, train_labels)
+        val_set = MultiModalPatchDataset(args.file_dir, val_cases, val_labels)
 
         train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=True,
                                   collate_fn=custom_collate, num_workers=args.num_workers)
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run 10-fold cross-validation for MPMRecNet")
     parser.add_argument("--train_csv", type=str, default="data/train.csv",
                         help="Path to training CSV")
-    parser.add_argument("--pt_dir", type=str, default="data/allpatch512tensor",
+    parser.add_argument("--file_dir", type=str, default="data/allpatch512tensor",
                         help="Path to patch tensor directory")
     parser.add_argument("--output_dir", type=str, default="outputs/checkpointsnew",
                         help="Directory to save models and metrics")

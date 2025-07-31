@@ -18,9 +18,9 @@
 
 ```
 python train/train.py \
-  --train_csv data/train.csv \
-  --pt_dir data/allpatch512tensor \
-  --model_output model/final_model.pt \
+  --train_csv  \
+  --pt_dir \
+  --model_output \
   --device cuda
 ```
 
@@ -28,9 +28,9 @@ python train/train.py \
 
 ```
 python train/crossval_train.py \
-  --train_csv data/train.csv \
-  --pt_dir data/allpatch512tensor \
-  --output_dir outputs/checkpointsnew \
+  --train_csv \
+  --pt_dir \
+  --output_dir \
   --device cuda \
   --batch_size 8
 ```
@@ -39,8 +39,8 @@ python train/crossval_train.py \
 
 ```
 python train/inference.py \
-  --pt_path data/allpatch512tensor/sample_case123.pt \
-  --model_path model/final_model.pt \
+  --file_path  \
+  --model_path  \
   --device cuda
 ```
 

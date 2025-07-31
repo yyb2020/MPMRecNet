@@ -63,7 +63,7 @@ for fold, (train_idx, val_idx) in enumerate(skf.split(case_ids, labels_np)):
     metrics = evaluate(model, val_loader)
     metrics["fold"] = fold + 1
     save_metrics([metrics], f"outputs/checkpointsnew/fold{fold+1}_metrics.csv")
-    torch.save(model.state_dict(), f"outputs/checkpointsnew/model_fold{fold+1}_best.pt")
+    torch.save(model.state_dict(), f"outputs/checkpointsnew/model_fold{fold+1}.pt")
 
     fold_metrics.append(metrics)
 

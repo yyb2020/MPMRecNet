@@ -16,7 +16,7 @@
 
 ### 1. **Standard Training (No Validation Set)**
 
-```
+```bash
 python train/train.py \
   --train_csv data/train.csv \
   --pt_dir data/allpatch512tensor \

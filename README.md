@@ -44,8 +44,8 @@ python train/inference.py \
   --device cuda
 ```
 
-## IPretrained Model
-You can download the pretrained MPMRecNet model here:[Download model.pt](https://github.com/yyb2020/MPMRecNet/releases/download/v1.0/model.pt)
+## Pretrained Model
+You can download the pretrained MPMRecNet model[here](https://github.com/yyb2020/MPMRecNet/releases/download/v1.0/model.pt)
 
 
 

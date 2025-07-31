@@ -23,7 +23,7 @@ def main(args):
     train_labels = train_df["label"].tolist()
 
     # Dataset and DataLoader
-    train_set = MultiModalPatchDataset(args.pt_dir, train_cases, train_labels)
+    train_set = MultiModalPatchDataset(args.file_dir, train_cases, train_labels)
     train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=True,
                               collate_fn=custom_collate, num_workers=args.num_workers)
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--train_csv", type=str, default="data/train.csv",
                         help="Path to training CSV file")
-    parser.add_argument("--pt_dir", type=str, default="data/allpatch512tensor",
+    parser.add_argument("--file_dir", type=str, default="data/allpatch512tensor",
                         help="Directory containing patch tensors")
     parser.add_argument("--model_output", type=str, default="model/final_model.pt",
                         help="Path to save the trained model")

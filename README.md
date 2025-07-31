@@ -19,7 +19,7 @@
 ```
 python train/train.py \
   --train_csv  \
-  --pt_dir \
+  --file_dir \
   --model_output \
   --device cuda
 ```
@@ -29,7 +29,7 @@ python train/train.py \
 ```
 python train/crossval_train.py \
   --train_csv \
-  --pt_dir \
+  --file_dir \
   --output_dir \
   --device cuda \
   --batch_size 8

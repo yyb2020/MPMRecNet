@@ -45,7 +45,7 @@ python train/inference.py \
 ```
 
 ## Pretrained Model
-You can download the pretrained MPMRecNet model[here](https://github.com/yyb2020/MPMRecNet/releases/download/v1.0/model.pt)
+You can download the pretrained MPMRecNet model [here](https://github.com/yyb2020/MPMRecNet/releases/download/v1.0/model.pt)
 
 
 

@@ -14,9 +14,9 @@
 
 ## Training
 
-### 1. **Standard Training (No Validation Set)**
+### 1. **Standard Training**
 
-```bash
+```
 python train/train.py \
   --train_csv data/train.csv \
   --pt_dir data/allpatch512tensor \
@@ -24,7 +24,25 @@ python train/train.py \
   --device cuda
 ```
 
+### 2. **10-Fold Cross-Validation**
 
+```
+python train/crossval_train.py \
+  --train_csv data/train.csv \
+  --pt_dir data/allpatch512tensor \
+  --output_dir outputs/checkpointsnew \
+  --device cuda \
+  --batch_size 8
+```
+
+## Inference
+
+```
+python train/inference.py \
+  --pt_path data/allpatch512tensor/sample_case123.pt \
+  --model_path model/final_model.pt \
+  --device cuda
+```
 
 ## Note
 

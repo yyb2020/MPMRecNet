@@ -4,8 +4,8 @@ import argparse
 import torch
 from models.model import MultiModalClassifier
 
-def load_patch_tensor(pt_path, device):
-    patch_data = torch.load(pt_path, map_location=device)
+def load_patch_tensor(file_path, device):
+    patch_data = torch.load(file_path, map_location=device)
 
     a_list = []
     b_list = []
@@ -37,7 +37,7 @@ def predict(pt_path, model_path, device='cuda'):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run inference with trained MPMRecNet model")
-    parser.add_argument("--pt_path", required=True, help="Path to input .pt file (preprocessed sample)")
+    parser.add_argument("--file_path", required=True, help="Path to input .pt file (preprocessed sample)")
     parser.add_argument("--model_path", default="model/final_model.pt", help="Path to trained model file")
     parser.add_argument("--device", default="cuda", help="Device to run inference (cuda or cpu)")
 

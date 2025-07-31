@@ -12,6 +12,19 @@
 - External validation AUC = **0.849**
 - Nomogram integration with clinical features
 
+## Training
+
+### 1. **Standard Training (No Validation Set)**
+
+```
+python train/train.py \
+  --train_csv data/train.csv \
+  --pt_dir data/allpatch512tensor \
+  --model_output model/final_model.pt \
+  --device cuda
+```
+
+
 
 ## Note
 

@@ -55,5 +55,5 @@ train_phase(model, train_loader, loss_fn, scaler, val_loader=val_loader, epochs=
 
 # Final evaluation
 metrics = evaluate(model, val_loader)
-save_metrics([metrics], "outputs/finalmodel_metrics.csv")
-torch.save(model.state_dict(), "outputs/final_model.pt")
+save_metrics([metrics], "finalmodel_metrics.csv")
+torch.save(model.state_dict(), "model/final_model.pt")

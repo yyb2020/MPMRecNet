@@ -24,7 +24,7 @@ val_loader = DataLoader(val_set, batch_size=1, shuffle=False,
 
 
 torch.cuda.empty_cache()
-model = MultiModalClassifier(freeze_a=False, freeze_b=False, patch_batch_size=480).cuda()
+model = MultiModalClassifier(freeze_a=False, freeze_b=False, patch_batch_size=480).to(device)
 model.load_state_dict(torch.load("model_path"))
 model.eval()
 

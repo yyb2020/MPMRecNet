@@ -10,7 +10,7 @@ from model.model import MultiModalClassifier
 from dataset.patch_dataset import MultiModalPatchDataset
 from utils.collate import custom_collate
 torch.backends.cudnn.benchmark = True
-device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load CSV
 val_df = pd.read_csv("val.csv")
@@ -18,14 +18,14 @@ val_cases = val_df["case_id"].tolist()
 val_labels = val_df["label"].tolist()
 
 # Dataset and DataLoader
-val_set = MultiModalPatchDataset("file_dir", train_cases, train_labels)
+val_set = MultiModalPatchDataset("file_dir", val_cases, val_labels)
 val_loader = DataLoader(val_set, batch_size=1, shuffle=True,
-                          collate_fn=custom_collate, num_workers=args.num_workers)
+                          collate_fn=custom_collate, num_workers=4)
 
 
 torch.cuda.empty_cache()
 model = MultiModalClassifier(freeze_a=False, freeze_b=False, patch_batch_size=480).cuda()
-model.load_state_dict(torch.load(final_model_path))
+model.load_state_dict(torch.load("model_path"))
 model.eval()
 
 for p in model.encoder_a.parameters():

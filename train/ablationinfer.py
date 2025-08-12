@@ -19,7 +19,7 @@ val_labels = val_df["label"].tolist()
 
 # Dataset and DataLoader
 val_set = MultiModalPatchDataset("file_dir", val_cases, val_labels)
-val_loader = DataLoader(val_set, batch_size=1, shuffle=True,
+val_loader = DataLoader(val_set, batch_size=1, shuffle=False,
                           collate_fn=custom_collate, num_workers=4)
 
 

@@ -69,7 +69,7 @@ class MultiModalClassifier(nn.Module):
         self.attn_b = PatchAttention(512)
         self.fusion = ModalAttentionFusion(512)
 
-        self.classifier = nn.Sequential(
+        self.cls = nn.Sequential(
             nn.Linear(512, 256),
             nn.ReLU(),
             nn.Dropout(0.2),
@@ -109,4 +109,44 @@ class MultiModalClassifier(nn.Module):
         b_tensor = torch.stack(agg_b_list, dim=0)
 
         fused = self.fusion(a_tensor, b_tensor)
-        return self.classifier(fused)
+        return self.cls(fused)
+
+
+
+    
+    def inference_a_only(self, a_list):
+        agg_a_list = []
+        for a_patches in a_list:
+            if a_patches is None or a_patches.numel() == 0:
+                continue
+            a_feat = self.extract_features_batchwise(self.encoder_a, a_patches)
+            agg_a = self.attn_a(a_feat)
+            agg_a_list.append(agg_a)
+    
+        if not agg_a_list:
+            raise RuntimeError("❌ No A patch")
+    
+        agg_a_tensor = torch.stack(agg_a_list, dim=0)
+        logits = self.cls(agg_a_tensor)  
+        return logits
+
+
+    
+
+    def inference_b_only(self, b_list):
+        agg_b_list = []
+        for b_patches in b_list:
+            if b_patches is None or b_patches.numel() == 0:
+                continue
+            b_feat = self.extract_features_batchwise(self.encoder_b, b_patches)
+            agg_b = self.attn_b(b_feat)
+            agg_b_list.append(agg_b)
+
+        if not agg_b_list:
+            raise RuntimeError("❌ No B patch")
+
+        agg_b_tensor = torch.stack(agg_b_list, dim=0)
+        logits = self.cls(agg_b_tensor)  
+        return logits
+
+

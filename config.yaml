@@ -1,0 +1,49 @@
+model:
+  name: MPMRecNet
+  backbone: MaxViT-T
+  input_size: 224
+  patch_batch_size: 480
+  dropout: 0.2
+  num_classes: 2
+  pretrained: true
+  freeze_encoder_a: false
+  freeze_encoder_b: false
+
+training:
+  epochs_phase1: 8  # Train encoder B
+  epochs_phase2: 8  # Train encoder A
+  epochs_phase3: 15 # Joint fine-tuning
+  final_lr: 7e-5
+  initial_lr: 1e-4
+  batch_size: 8
+  num_workers: 10
+  optimizer: Adam
+  scheduler: CosineAnnealingWarmup
+  loss_function: FocalLoss
+
+data:
+  dataset_name: CRC_MPM
+  file_dir: data/allpatch512tensor
+  train_csv: data/train.csv
+  val_csv: data/val.csv
+  test_csv: data/test.csv
+  patch_input_format: .pt
+  normalization: zscore
+  num_channels: 3
+  resize_to: 224
+  patch_size: 512
+  stride: 512
+  max_patches_per_case: null
+
+ablation:
+  enable_ablation: true
+  ablate_branch: none   
+  model_path: outputs/checkpointsnew/model_fold1.pt
+  inference_batch_size: 1
+
+inference:
+  device: cuda
+  model_path: model/final_model.pt
+  pt_input_file: path/to/sample.pt
+  save_predictions: true
+  output_dir: results/

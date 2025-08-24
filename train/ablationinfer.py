@@ -37,6 +37,8 @@ for p in model.encoder_b.parameters():
 all_probs, all_preds, all_labels = [], [], []
 case_ids = []
 
+
+# A-only Inference
 with torch.no_grad():
     for a, b, y, cid in tqdm(val_loader, desc="[A-only Inference]"):
         if not a or a[0].numel() == 0:
@@ -48,9 +50,27 @@ with torch.no_grad():
         probs = torch.softmax(logits, dim=1)[:, 1]
         preds = torch.argmax(logits, dim=1)
 
+        all_probs.extend(probs.cpu().tolist())
+        all_preds.extend(preds.cpu().tolist())
+        all_labels.extend(y.cpu().tolist())
+        case_ids.extend(cid)
+      
 
+# B-only Inference
+with torch.no_grad():
+    for a, b, y, cid in tqdm(val_loader, desc="[B-only Inference]"):
+        if not b or b[0].numel() == 0:
+            continue
+        b = [x.cuda() for x in b]
+        y = y.cuda()
+
+        logits = model.inference_b_only(b)
+        probs = torch.softmax(logits, dim=1)[:, 1]
+        preds = torch.argmax(logits, dim=1)
 
         all_probs.extend(probs.cpu().tolist())
         all_preds.extend(preds.cpu().tolist())
         all_labels.extend(y.cpu().tolist())
         case_ids.extend(cid)
+
+
